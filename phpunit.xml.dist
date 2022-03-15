@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd" bootstrap="test/bootstrap.php" colors="true">
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="./vendor/phpunit/phpunit/phpunit.xsd"
+         bootstrap="test/bootstrap.php"
+         colors="true"
+         defaultTestSuite="default"
+>
   <coverage processUncoveredFiles="true">
     <include>
       <directory suffix=".php">./src</directory>
     </include>
   </coverage>
   <testsuites>
-    <testsuite name="laminas-ldap Test Suite">
+    <testsuite name="default">
       <directory>./test</directory>
+      <exclude>./test/ConnectTest.php</exclude>>
+      <exclude>./test/OfflineReconnectTest.php</exclude>
+      <exclude>./test/ReconnectTest.php</exclude>
+    </testsuite>
+    <testsuite name="connectivity">
+      <file>./test/ConnectTest.php</file>
+      <file>./test/OfflineReconnectTest.php</file>
+      <file>./test/ReconnectTest.php</file>
     </testsuite>
   </testsuites>
   <php>
@@ -43,7 +56,7 @@
                                 ALT_DN: CN=Alice Baker,OU=Sales,DC=foo,DC=net
                           ALT_PASSWORD: apass
         -->
-    <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="false"/>
+    <env name="TESTS_LAMINAS_LDAP_ONLINE_ENABLED" value="true"/>
     <env name="TESTS_LAMINAS_LDAP_HOST" value="localhost"/>
     <env name="TESTS_LAMINAS_LDAP_PORT" value="3890"/>
     <env name="TESTS_LAMINAS_LDAP_SCRIPTS_PORT" value="3891"/>
